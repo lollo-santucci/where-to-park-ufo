@@ -45,6 +45,8 @@ const Cursor3D: React.FC = () => {
   useFrame(({ pointer, clock }) => {
     if (!cursorGroup.current || !modelRef.current || !lightRef.current) return
 
+    document.body.style.cursor = 'none'
+    
     const zDiff = targetZPosition - currentZPosition
     setCurrentZPosition(prev => 
       Math.max(-MAX_Z_POSITION, Math.min(MAX_Z_POSITION, prev + zDiff * 0.1))
