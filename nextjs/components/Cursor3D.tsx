@@ -6,7 +6,7 @@ import * as THREE from 'three'
 // Configurazione dettagliata del comportamento del cursore 3D
 const CONFIG = {
   MAX_Z_POSITION: 8,        // Distanza massima del cursore dall'osservatore (in entrambe le direzioni)
-  SCALE_FACTOR: 0.5,        // Fattore di scala per il modello 3D dell'UFO
+  SCALE_FACTOR: 0.1,        // Fattore di scala per il modello 3D dell'UFO
   CURSOR_OFFSET: new THREE.Vector2(-0.1, -1.5),  // Offset del cursore rispetto alla posizione del puntatore
   Y_ROTATION_SPEED: 0.01,   // Velocità di rotazione costante dell'UFO sull'asse Y
   TILT_FACTOR: new THREE.Vector2(5, 1),  // Fattori di inclinazione (x: laterale, y: avanti/indietro)
@@ -69,7 +69,7 @@ const Cursor3D: React.FC = () => {
     // Calcola la nuova posizione target basata sul puntatore del mouse
     const depthScaleFactor = Math.abs(camera.position.z - currentPosition.current.z) / camera.position.z
     const x = (pointer.x * viewport.width) / 2 * depthScaleFactor
-    const y = (pointer.y * viewport.height) / 2 * depthScaleFactor
+    const y = (pointer.y * viewport.height) / 2 * depthScaleFactor + 1.5
     targetPosition.current.set(
       x + CONFIG.CURSOR_OFFSET.x,
       y + CONFIG.CURSOR_OFFSET.y,
@@ -109,7 +109,7 @@ const Cursor3D: React.FC = () => {
     modelRef.current.rotation.y += CONFIG.Y_ROTATION_SPEED
 
     // Aggiorna la posizione della luce per seguire l'UFO
-    lightRef.current.position.set(0, 2, 0)
+    lightRef.current.position.set(0, 1, 1)
   })
 
   return (
@@ -119,8 +119,8 @@ const Cursor3D: React.FC = () => {
       {/* Aggiunge una luce puntiforme che segue l'UFO per illuminarlo */}
       <pointLight
         ref={lightRef}
-        intensity={2}
-        distance={10}
+        intensity={5}
+        distance={2}
         color="white"
         castShadow
       />

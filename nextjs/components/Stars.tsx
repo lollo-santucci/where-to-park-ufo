@@ -37,13 +37,13 @@ interface StarsProps {
 }
 
 // Stars component
-export const Stars: React.FC<StarsProps> = ({ count = 200, spread = 20 }) => {
+export const Stars: React.FC<StarsProps> = ({ count = 2000, spread = 50 }) => {
   // Generate star positions
   const starPositions = useMemo(() => {
     return Array.from({ length: count }, () => [
-      (Math.random() - 0.5) * spread,
-      (Math.random() - 0.5) * spread,
-      (Math.random() - 0.5) * spread,
+      (Math.random() - 0.5) * spread * 2,
+      (Math.random() - 0.5) * spread * 2,
+      (Math.random() - 1.5) * spread / 1.5,
     ] as [number, number, number]);
   }, [count, spread]);
 
